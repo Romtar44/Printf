@@ -20,15 +20,15 @@ void	print_width_pointer(t_point *print)
 
 void	print_cancer(t_point *print)
 {
-	print->width += 1;
+	print->width -= 6;
 	if (print->minus == -1)
 	{
 		print_width_pointer(print);
-		ft_putnstr("0x", 2, print);
+		ft_putnstr("(null)", 6, print);
 	}
 	else if (print->minus == 1)
 	{
-		ft_putnstr("0x", 2, print);
+		ft_putnstr("(null)", 6, print);
 		print_width_pointer(print);
 	}
 }
@@ -38,12 +38,12 @@ void	print_pointer(t_point *print)
 	unsigned long int	p;
 
 	p = va_arg(print->args, unsigned long int);
-	print->width -= (hexa_len(p) + 2);
-	if (!p && print->precision == 0)
+	if (!p)
 	{
 		print_cancer(print);
 		return ;
 	}
+	print->width -= (hexa_len(p) + 2);
 	if (print->minus == 1)
 	{
 		ft_putnstr("0x", 2, print);
